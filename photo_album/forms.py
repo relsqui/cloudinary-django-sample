@@ -13,8 +13,9 @@ class PhotoForm(ModelForm):
         fields = '__all__'
 
 class PhotoDirectForm(PhotoForm):
-    image = CloudinaryJsFileField()
+    upload_preset_name = "sample_signed_" + hashlib.sha1(to_bytes(cloudinary.config().api_key + cloudinary.config().api_secret)).hexdigest()[0:10]
+    image = CloudinaryJsFileField(options=dict(upload_preset=upload_preset_name))
 
 class PhotoUnsignedDirectForm(PhotoForm):
-    upload_preset_name = "sample_" + hashlib.sha1(to_bytes(cloudinary.config().api_key + cloudinary.config().api_secret)).hexdigest()[0:10]
+    upload_preset_name = "sample_unsigned_" + hashlib.sha1(to_bytes(cloudinary.config().api_key + cloudinary.config().api_secret)).hexdigest()[0:10]
     image = CloudinaryUnsignedJsFileField(upload_preset_name)
