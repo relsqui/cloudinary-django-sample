@@ -27,6 +27,9 @@ def list(request):
         dict(format="png", angle=20, height=None, width=None, transformation=[
             dict(crop="fill", gravity="north", width=150, height=150, effect="sepia"),
         ]),
+        dict(overlay=dict(url="https://cloudinary.com/images/logo.png"),
+             # limit logo watermark size to image size by scaling instead of cropping
+             flags=["relative"], crop="limit", width="1.0", height="1.0"),
         dict(effect="saturation:50")
     ]
     samples = [filter_nones(dict(defaults, **sample)) for sample in samples]
