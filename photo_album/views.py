@@ -48,10 +48,7 @@ def upload(request):
             api.create_upload_preset(name=PhotoUnsignedDirectForm.upload_preset_name,
                                      unsigned=True,
                                      folder="preset_folder",
-                                     transformation=[{
-                                        "height": 500,
-                                        "width": 500,
-                                        "crop": "limit"}],
+                                     transformation=dict(height=500, width=500, crop="limit"),
                                      tags=["sample-upload"])
 
     direct_form = PhotoUnsignedDirectForm() if unsigned else PhotoDirectForm()
