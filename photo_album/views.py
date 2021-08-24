@@ -27,7 +27,7 @@ def list(request):
         dict(format="png", angle=20, height=None, width=None, transformation=[
             dict(crop="fill", gravity="north", width=150, height=150, effect="sepia"),
         ]),
-        dict(effect="saturation:150")
+        dict(effect="saturation:50")
     ]
     samples = [filter_nones(dict(defaults, **sample)) for sample in samples]
     return render(request, 'list.html', dict(photos=Photo.objects.all(), samples=samples))
