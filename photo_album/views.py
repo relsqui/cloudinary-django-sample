@@ -30,7 +30,7 @@ def list(request):
         dict(overlay=dict(url="https://cloudinary.com/images/logo.png"),
              # limit logo watermark size to image size by scaling instead of cropping
              flags=["relative"], crop="limit", width="1.0", height="1.0"),
-        dict(effect="saturation:50")
+        dict(crop="limit", effect="saturation:50")
     ]
     samples = [filter_nones(dict(defaults, **sample)) for sample in samples]
     return render(request, 'list.html', dict(photos=Photo.objects.all(), samples=samples))
