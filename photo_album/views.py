@@ -35,6 +35,17 @@ def list(request):
         dict(crop="limit", effect="saturation:50")
     ]
     samples = [filter_nones(dict(defaults, **sample)) for sample in samples]
+
+    if request.method == "POST":
+        try:
+            to_delete = Photo.objects.get(id = request.POST["photo"])
+            if request.POST.get("from_cloudinary", False):
+                api.delete_resources([to_delete.image.public_id])
+            to_delete.delete()
+        except Photo.DoesNotExist:
+            # Our work is apparently done here
+            pass
+
     return render(request, 'list.html', dict(photos=Photo.objects.all(), samples=samples))
 
 

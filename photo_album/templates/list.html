@@ -34,6 +34,12 @@
             {# THUMBNAIL defined in context_processors #}
             {% cloudinary photo.image THUMBNAIL %}
           </a>
+        <form action="{% url 'photo_album.views.list' %}" method="post">
+          {% csrf_token %}
+          <input type="submit" value="Delete Photo">
+          <input type="checkbox" name="from_cloudinary"> from Cloudinary too
+          <input type="hidden" name="photo" value="{{ photo.id }}">
+        </form>
         <div class="less_info">
           <a href="#" class="toggle_info">More transformations...</a>
         </div>
