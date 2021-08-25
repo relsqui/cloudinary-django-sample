@@ -45,9 +45,9 @@ def upload(request):
     # For the sake of simplicity of the sample site, we generate the preset on the fly.
     # It only needs to be created once, in advance.
     try:
-        api.upload_preset(direct_form.upload_preset_name)
+        api.upload_preset(Photo.upload_preset_name)
     except api.NotFound:
-        api.create_upload_preset(name=direct_form.upload_preset_name,
+        api.create_upload_preset(name=Photo.upload_preset_name,
                                  unsigned=unsigned,
                                  folder="preset_folder",
                                  transformation=dict(height=500, width=500, crop="limit"),
