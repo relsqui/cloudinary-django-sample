@@ -9,9 +9,17 @@ class Photo(models.Model):
     ## Misc Django Fields
     create_time = models.DateTimeField(auto_now_add=True)
     title = models.CharField("Title (optional)", max_length=200, blank=True)
+    default_options = dict(
+        tags = ["new upload"],
+        transformation = dict(
+            width = 500,
+            height = 500,
+            crop = "limit"
+        )
+    )
 
     ## Points to a Cloudinary image
-    image = CloudinaryField('image')
+    image = CloudinaryField('image', **default_options)
 
     """ Informative name for model """
     def __unicode__(self):

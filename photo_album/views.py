@@ -59,7 +59,7 @@ def upload(request):
             api.upload_preset(PhotoUnsignedDirectForm.upload_preset_name)
         except api.NotFound:
             api.create_upload_preset(name=PhotoUnsignedDirectForm.upload_preset_name, unsigned=True,
-                                     folder="preset_folder")
+                                     folder="preset_folder", **Photo.default_options)
 
     direct_form = PhotoUnsignedDirectForm() if unsigned else PhotoDirectForm()
     context = dict(

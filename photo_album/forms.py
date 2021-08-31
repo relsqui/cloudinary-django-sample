@@ -13,8 +13,8 @@ class PhotoForm(ModelForm):
         fields = '__all__'
 
 class PhotoDirectForm(PhotoForm):
-    image = CloudinaryJsFileField()
+    image = CloudinaryJsFileField(options=Photo.default_options)
 
 class PhotoUnsignedDirectForm(PhotoForm):
-    upload_preset_name = "new_sample_" + hashlib.sha1(to_bytes(cloudinary.config().api_key + cloudinary.config().api_secret)).hexdigest()[0:10]
+    upload_preset_name = "new_" + hashlib.sha1(to_bytes(cloudinary.config().api_key + cloudinary.config().api_secret)).hexdigest()[0:10]
     image = CloudinaryUnsignedJsFileField(upload_preset_name)
