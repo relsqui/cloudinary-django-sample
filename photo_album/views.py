@@ -51,6 +51,7 @@ def list(request):
 
 def upload(request):
     unsigned = request.GET.get("unsigned") == "true"
+
     direct_form = PhotoUnsignedDirectForm() if unsigned else PhotoDirectForm()
 
     # For the sake of simplicity of the sample site, we generate the preset on the fly.
@@ -59,10 +60,10 @@ def upload(request):
         api.upload_preset(direct_form.upload_preset_name)
     except api.NotFound:
         api.create_upload_preset(name=direct_form.upload_preset_name,
-                                 unsigned=unsigned,
-                                 folder="preset_folder",
-                                 transformation=dict(height=500, width=500, crop="limit"),
-                                 tags=["sample-upload"])
+                                    unsigned=unsigned,
+                                    folder="preset_folder",
+                                    transformation=dict(height=500, width=500, crop="limit"),
+                                    tags=["sample-upload"])
 
     context = dict(
         # Form demonstrating backend upload
